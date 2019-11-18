@@ -1,0 +1,30 @@
+global:
+
+templates:
+- '/etc/alertmanager/*.tmpl'
+# The root route on which each incoming alert enters.
+route:
+  # default route if none match
+  receiver: alert-emailer
+
+  # The labels by which incoming alerts are grouped together. For example,
+  # multiple alerts coming in for cluster=A and alertname=LatencyHigh would
+  # be batched into a single group.
+  # TODO:
+  group_by: ['alertname', 'priority']
+
+  # All the above attributes are inherited by all child routes and can
+  # overwritten on each.
+
+receivers:
+- name: alert-emailer
+  email_configs:
+  - to: 'email@xxx.com'
+    send_resolved: true
+    from: 'devops-admin@xxx.com'
+    smarthost: 'smtp.office365.com:587'
+    auth_username: 'devopsadmin@xxx.com'
+    auth_password: 'xxx@xxx'
+    auth_identity: 'devops-admin@xxx.com'
+
+
