@@ -1,1 +1,0 @@
-# prometheus-nodeEx-alertmnager-ansible
